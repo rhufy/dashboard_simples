@@ -30,16 +30,22 @@ def analise(nome_arquivo):
     qtd_reprovados =None
 
     if 'nota' in colunas and 'aluno' in colunas:
-        media_aluno = df.groupby('aluno')['nota'].mean().sort_values(ascending=False)
+        media_alu = df.groupby('aluno')['nota'].mean().sort_values(ascending=False)
+        media_aluno = media_alu.reset_index(name='media').to_html(classes='table table-bordered table-custom',index=False)
+        
     if 'disciplina' in colunas and 'nota' in colunas:
-        media_disciplina = df.groupby('disciplina')['nota'].mean().sort_values(ascending=False)
+        media_disc = df.groupby('disciplina')['nota'].mean().sort_values(ascending=False)
+        media_disciplina = media_disc.reset_index(name='media').to_html(classes='table table-bordered table-custom',index=False)
+
     df['situacao'] = df['nota'].apply(lambda x : 'aprovado' if x>= 5 else 'reprovado')
     if 'situacao' in colunas :
-        qtd_aprovados = df[df['situacao']=='aprovado'].value_counts()
-        qtd_reprovados = df[df['situacao']=='reprovado'].value_counts()
-    tabela = df.to_html(classes='table table-bordered',index=False)
+        qtd_aprovados = df[df['situacao'] == 'aprovado'].shape[0]
+        qtd_reprovados = df[df['situacao'] == 'reprovado'].shape[0]
 
-    return render_template('analises.html',media_aluno=media_aluno,media_disciplina=media_disciplina,qtd_aprovados=qtd_aprovados,qtd_reprovados=qtd_reprovados,tabela=tabela)
+    tabela = df.to_html(classes='table table-bordered table-custom',index=False)
+
+    return render_template('analise.html',media_aluno=media_aluno,media_disciplina=media_disciplina,
+                           qtd_aprovados=qtd_aprovados,qtd_reprovados=qtd_reprovados,tabela=tabela,nome_arquivo=nome_arquivo)
 
 @app.route('/downloads/<tabela>')
 def downloads(tabela):
