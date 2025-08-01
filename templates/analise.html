@@ -13,16 +13,37 @@
         <h2>Resumo</h2>
         <h3>Média por Aluno:</h3>
         {{ media_aluno|safe }}
+        {% if grafico %}
+            <h3>Gráfico de Media dos alunos:</h3>
+            <img src="{{ url_for('static', filename=grafico) }}" alt="Gráfico de Média" style="max-width: 600px;">
+        {% endif %}
+        
         <h3>Média por Disciplina:</h3>
         {{ media_disciplina|safe }}
-        {# {% if grafico %}
-            <h3>Gráfico de vendas por mês</h3>
-            <img src="/{{ grafico }}" alt="Gráfico de Vendas">
-        {% endif % }#}
+        {% if grafico1 %}
+            <h3>Gráfico da Media por Disciplina:</h3>
+            <img src="{{ url_for('static', filename=grafico1) }}" alt="Gráfico da Media por disciplina" style="max-width: 600px;">
+        {% endif %}
+
+        
 
         <h3>Prévia dos dados</h3>
         {{ tabela|safe }}
-        <h4>Quantidade de alunos aprovados {{ qtd_aprovados }} | reprovaram {{ qtd_reprovados }}</h4>
+        {% if qtd_aprovados %}
+           <h4>Quantidade de alunos aprovações {{ qtd_aprovados }}</h4>
+           {{ aprovacoes|safe }}
+        {% endif %}
+        {% if qtd_reprovados %}
+           <h4>Quantidade de reprovações {{ qtd_reprovados }}</h4>
+           {{ reprovacoes|safe }}
+        {% endif %}
+
+        {% for aluno,dados_aluno in dados_aluno.items() %}
+            <h4>Dados do aluno(a): {{ aluno }}</h4>
+            {{ dados_aluno|safe }}
+        {% endfor %}
+
+
 
         <a href="{{ url_for('downloads', tabela=nome_arquivo) }}" class="btn" download>
             📥 Baixar Tabela em Excel

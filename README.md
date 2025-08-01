@@ -11,6 +11,7 @@ Este projeto é uma aplicação web desenvolvida com **Flask** e **pandas** que 
 - ✅ Classificação de alunos como **aprovado** ou **reprovado** com base na nota.
 - 📋 Exibição dos dados em uma tabela estilizada.
 - 📥 Exportação da tabela completa para um arquivo **.xlsx**.
+- 📊 Criação de gráficos
 
 ---
 
@@ -21,6 +22,7 @@ Este projeto é uma aplicação web desenvolvida com **Flask** e **pandas** que 
 - pandas
 - HTML com Bootstrap (templates)
 - Excel (via `pandas.to_excel`)
+- Matplotlib
   
 ---
 
@@ -95,6 +97,7 @@ Este projeto está sob a licença MIT. Sinta-se livre para usar, modificar e con
 ## 🙋‍♂️ Autor
 
 **João Carlos**
-[GitHub](https://github.com/rhufy) • [LinkedIn](https://www.linkedin.com/in/dev-joao-carlos)
+(https://)[GitHub](https://github.com/rhufy)
+ • [LinkedIn](https://www.linkedin.com/in/dev-joao-carlos)
 
 ```
